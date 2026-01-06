@@ -1,0 +1,495 @@
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Educational Tour Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #000000 0%, #1a1a2e 50%, #16213e 100%);
+            color: white;
+            overflow-x: hidden;
+        }
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 10px 0;
+            z-index: 1000;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            margin: 0 20px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: #ffeb3b;
+        }
+        header {
+            text-align: center;
+            padding: 120px 20px 80px;
+            background-image: url('https://pinaywise.com/wp-content/uploads/2024/01/Tops-Lookout-cebu-philippines-2.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+        }
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6); /* Adjusted overlay for better readability */
+            z-index: 1;
+        }
+        header h1 {
+            position: relative;
+            z-index: 2;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.5em;
+            margin: 0;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.8);
+        }
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #ffeb3b;
+        }
+        p {
+            font-size: 1.2em;
+            margin: 8px 0;
+        }
+        .profile-hero {
+            background: rgba(26, 26, 46, 0.8);
+            padding: 60px 20px;
+            text-align: center;
+        }
+        .profile-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+            transition: transform 0.3s;
+        }
+        .profile-img:hover {
+            transform: scale(1.05);
+        }
+        .profile-details {
+            max-width: 500px;
+            text-align: left;
+        }
+        .profile-details h3 {
+            font-size: 2em;
+            margin-bottom: 10px;
+            color: #ffeb3b;
+        }
+        .profile-details p {
+            margin: 10px 0;
+        }
+        .cta-button {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #ff6b6b;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: background 0.3s;
+            margin-top: 15px;
+        }
+        .cta-button:hover {
+            background: #ff5252;
+        }
+        section {
+            padding: 50px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .section-box {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        .projects {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .project {
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 20px;
+            width: 300px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            transition: box-shadow 0.3s, background 0.3s;
+        }
+        .project:hover {
+            box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+            background: rgba(255,255,255,0.15);
+        }
+        .project img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 0px;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1001;
+        }
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+        }
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+        }
+        .testimonials {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .testimonial {
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 20px;
+            width: 300px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            transition: box-shadow 0.3s, background 0.3s;
+        }
+        .testimonial:hover {
+            box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+            background: rgba(255,255,255,0.15);
+        }
+        .testimonial img {
+            width: 80px;
+            height: 60px;
+            border-radius: 0%;
+            margin-bottom: 10px;
+        }
+        .itinerary {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .day {
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            transition: box-shadow 0.3s, background 0.3s;
+        }
+        .day:hover {
+            box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+            background: rgba(255,255,255,0.15);
+        }
+.view-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #ff6b6b;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: bold;
+    transition: background 0.3s;
+    margin-top: 10px;
+    cursor: pointer;
+    border: none;
+}
+.view-btn:hover {
+    background: #ff5252;
+}
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 1001;
+}
+.modal img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 10px;
+}
+.modal .close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 40px;
+    cursor: pointer;
+}
+#modal-toggle-1:checked ~ #modal-1,
+#modal-toggle-2:checked ~ #modal-2,
+#modal-toggle-3:checked ~ #modal-3,
+#modal-toggle-4:checked ~ #modal-4,
+#modal-toggle-5:checked ~ #modal-5 {
+    display: flex;
+}
+        @media (max-width: 768px) {
+            header h1 { font-size: 2.5em; }
+            .projects { flex-direction: column; align-items: center; }
+            .testimonials { flex-direction: column; align-items: center; }
+            .profile-section { flex-direction: column; text-align: center; }
+        }
+        .view-btn {
+         padding: 8px 16px;
+         font-size: 0.9em;
+       }
+       .modal img {
+        width: auto;
+        height: auto;
+         max-width: 100%;
+         max-height: 100%;
+         border-radius: 10px;
+}
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="#profile">Profile</a>
+        <a href="#about">About</a>
+        <a href="#projects">Companies</a>
+        <a href="#itinerary">Ganap</a>
+    </nav>
+    
+    <header>
+        <h1>Educational Tour</h1>
+    </header>
+    
+    <div id="profile" class="profile-hero">
+        <h2>Tour Organizer Profile</h2>
+        <div class="profile-section">
+            <img src="13.jpg" alt="Your Profile Photo" class="profile-img">
+            <div class="profile-details">
+                <h3>Pantinople, Bobby Jr A.</h3>
+                <p><strong>ADV 103</strong></p>
+                <p><strong>Bachelor Of Science Technology</strong></p>
+                <p><strong>Email:bobby.pantinople@hcdc.edu.ph</strong></p>
+                <p><strong>Phone Number:09517860450</strong></p>
+            </div>
+        </div>
+    </div>
+    
+    <section id="about">
+        <div class="section-box">
+            <h2>About Me</h2>
+            <p>I am a 3rd-year Bachelor of Science in Information Technology student at Holy Cross of Davao College, committed to developing strong technical skills and a deep understanding of core IT concepts. I actively participate in coursework, projects, and hands-on learning to enhance my knowledge in programming, networking, systems analysis, and emerging technologies. My focus is on applying what I learn to real-world situations while maintaining professionalism, excellence, and dedication. I continuously seek opportunities to expand my skills, balancing academic achievement with practical experience to prepare for a successful career in the IT field.</p>
+        </div>
+    </section>
+    
+    <section id="projects">
+        <div class="section-box">
+           <section id="companies">
+    <div class="container">
+        <section id="companies">
+    <div class="container">
+        <h2>Companies</h2>
+        <div class="projects">
+            <div class="project">
+                <img src="14u.jpg" alt="Group Learning Photo" onclick="openLightbox(this.src)">
+                <h3>UP BUSINESS INCUBATOR FOR IT</h3>
+                <p></p>
+            </div>
+            <div class="project">
+                <img src="15rivan.jpg" alt="Company 1 Logo" onclick="openLightbox(this.src)">
+                <h3>RIVAN IT CEBU</h3>
+                <p></p>
+            </div>
+            <div class="project">
+                <img src="16.jpg" alt="Company 2 Logo" onclick="openLightbox(this.src)">
+                <h3>DYNATA PHILIPPINES INC.</h3>
+                <p></p>
+            </div>
+            <div class="project">
+                <img src="17M.jpg" alt="Group Learning Photo" onclick="openLightbox(this.src)">
+                <h3>MATA TECHNOLOGIES INC.</h3>
+                <p></p>
+            </div>
+            <!-- Added 5th company as requested -->
+            <div class="project">
+                <img src="19t.jpg" alt="Company 5 Logo" onclick="openLightbox(this.src)">
+                <h3>T.A.R.S.I.E.R 177</h3>
+                <p></p>
+            </div>
+            <div class="project">
+                <img src="bcert.jpg" alt="Certificate" onclick="openLightbox(this.src)">
+                <h3>WATT Certificate</h3>
+                <p></p> 
+            </div>
+        </div>
+    </div>
+</section>
+
+</section>
+
+    
+ <section id="journal">
+    <div class="section-box">
+        <h2>Journal</h2>
+        <p>Hear from students and travelers about the educational impact of our tour.</p>
+        <div class="testimonials">
+            <div class="testimonial">
+                <img src="20u.webp" alt="UP Logo" style="width: 300px; height: 200px; object-fit: cover;">
+                <p>"The University of the Philippines (UP) has several Technology Business Incubators (TBIs) that support IT‑focused and technology startups by providing practical, real‑world business development resources and mentorship. These incubators are part of UP’s broader mission to promote innovation, entrepreneurship, and technology commercialization across the Philippines."</p>
+                <p><strong></strong></p>
+                <input type="checkbox" id="modal-toggle-1" style="display: none;">
+                <label for="modal-toggle-1" class="view-btn">Scanned Journal</label>
+                <div class="modal" id="modal-1">
+                    <label for="modal-toggle-1" class="close">&times;</label>
+                    <img src="jup.jpg" alt="UP Logo">
+                </div>
+            </div>
+            <div class="testimonial">
+                <img src="21r.jpg" alt="Rivan IT Logo" style="width: 300px; height: 200px; object-fit: cover;">
+                <p>"Visiting Rivan IT (Rivan School of Technology) opened my eyes to what professional IT training looks like. As a student used to classroom learning, seeing their training labs filled with real Cisco routers, switches, and enterprise equipment was impressive - this is what the real world uses!
+
+The instructors shared their experiences working abroad and how proper training and certifications opened doors for them globally. They emphasized that Filipino IT professionals are respected worldwide, but we need the right skills and credentials to compete."</p>
+                <p><strong></strong></p>
+                <input type="checkbox" id="modal-toggle-2" style="display: none;">
+                <label for="modal-toggle-2" class="view-btn">Scanned Journal</label>
+                <div class="modal" id="modal-2">
+                    <label for="modal-toggle-2" class="close">&times;</label>
+                    <img src="jrivan.jpg" alt="Rivan IT Logo">
+                </div>
+            </div>
+            <div class="testimonial">
+                <img src="22m.webp" alt="MATA" style="width: 300px; height: 200px; object-fit: cover;">
+                <p>"Experiencing MATA Technologies’ VR and 360° tours gave me a glimpse into the future of technology. As a student focused on coding, seeing VR’s applications in real estate and tourism was eye-opening. Their virtual tour of Lubang Island made me feel present on-site, while showcasing how technology can preserve Philippine culture and promote local tourism. The team’s passion for using innovation to support Filipino businesses was truly inspiring.</p>
+                <p><strong></strong></p>
+                <input type="checkbox" id="modal-toggle-3" style="display: none;">
+                <label for="modal-toggle-3" class="view-btn">Scanned Journal</label>
+                <div class="modal" id="modal-3">
+                    <label for="modal-toggle-3" class="close">&times;</label>
+                    <img src="jmata.jpg" alt="MATA">
+                </div>
+            </div>
+            <div class="testimonial">
+                <img src="23t.jpg" alt="TaRSIER" style="width: 300px; height: 200px; object-fit: cover;">
+                <p>"Today, I visited the Telephone and Radio System Integrated Emergency Response (TaRSIER 117) in Bohol. As an IT student, witnessing this critical infrastructure in action was enlightening, showing how technology directly saves lives. I was impressed by the seamless integration of landline, mobile, radio, and VoIP communications, and how operators efficiently coordinate emergency responses across the province for medical and disaster situations.  "</p>
+                <p><strong></strong></p>
+                <input type="checkbox" id="modal-toggle-4" style="display: none;">
+                <label for="modal-toggle-4" class="view-btn">Scanned Journal</label>
+                <div class="modal" id="modal-4">
+                    <label for="modal-toggle-4" class="close">&times;</label>
+                    <img src="ptar.jpg" alt="TaRSIER">
+                </div>
+            </div>
+            <div class="testimonial">
+                <img src="21d.jpg" alt="Dynata" style="width: 300px; height: 200px; object-fit: cover;">
+                <p>"Dynata is a global market research and data company that specializes in providing first‑party data—information collected directly from consumers and business professionals who opt in to participate in surveys and research. It is one of the largest first‑party data platforms in the world, serving thousands of clients across industries such as marketing, advertising, consulting, media, and corporate research.</p>
+                <p><strong></strong></p>
+                <input type="checkbox" id="modal-toggle-5" style="display: none;">
+                <label for="modal-toggle-5" class="view-btn">Scanned Journal</label>
+                <div class="modal" id="modal-5">
+                    <label for="modal-toggle-5" class="close">&times;</label>
+                    <img src="jnata.jpg" alt="Dynata">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+    
+   <section id="itinerary">
+    <div class="section-box">
+        <h2>Educational PICTURE</h2>
+        <div class="itinerary">
+            <div class="day">
+                <h3>Day Tour Educational Tour</h3>
+                <p>the educational tour was a valuable and enriching experience. It gave me the opportunity to learn beyond the classroom and see how different organizations and industries operate in real-life settings. The tour helped me understand how the concepts and lessons we study in school are applied in actual work environments.
+
+It also allowed me to gain new knowledge, observe professional practices, and appreciate the importance of teamwork, discipline, and responsibility in the workplace. Meeting professionals and seeing real operations made the learning experience more meaningful and interesting.</p>
+            </div>
+        <h3>Pictures</h3>
+        <div class="pictures-gallery" style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-top: 20px;">
+    <img src="111111111.jpg" alt="Picture 1" style="width: 200px; height: 150px; object-fit: cover; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.3);">
+    <img src="22222222.jpg" alt="Picture 2" style="width: 200px; height: 150px; object-fit: cover; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.3);">
+    <img src="333333333.jpg" alt="Picture 3" style="width: 200px; height: 150px; object-fit: cover; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.3);">
+    <img src="4444444444.jpg" alt="Picture 4" style="width: 200px; height: 150px; object-fit: cover; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.3);">
+    <img src="5555555555.jpg" alt="Picture 5" style="width: 200px; height: 150px; object-fit: cover; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.3);">
+    <!-- Added 6th picture -->
+    <img src="66666666666.jpg" alt="Picture 6" style="width: 200px; height: 150px; object-fit: cover; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.3);">
+</div>
+
+</section>
+
+    
+    <div id="lightbox" class="lightbox">
+        <span class="close" onclick="closeLightbox()">&times;</span>
+        <img id="lightbox-img" src="">
+    </div>
+    
+    <script>
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Lightbox functionality
+        function openLightbox(src) {
+            document.getElementById('lightbox-img').src = src;
+            document.getElementById('lightbox').style.display = 'flex';
+        }
+        
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
